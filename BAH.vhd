@@ -1,0 +1,66 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY BAH IS
+
+	PORT (
+		CLK : IN STD_LOGIC;
+		X : IN STD_LOGIC;
+		y : OUT BIT_VECTOR(2 DOWNTO 0)
+	);
+
+END BAH;
+
+ARCHITECTURE MaqEstLED OF BAH IS
+
+SIGNAL CONTAGEM : INTEGER RANGE 0 TO 2 := 0;
+SIGNAL CLKOUNT : INTEGER RANGE 0 TO 5000000 := 0;
+SIGNAL STATE : STD_LOGIC := '1';
+SIGNAL XD : STD_LOGIC := '0';
+--SIGNAL XDTEMP : STD_LOGIC := '0';
+
+BEGIN
+		PROCESS (CLK)
+		BEGIN
+		
+		IF RISING_EDGE(CLK) THEN
+		
+				IF ( X /= STATE ) AND ( CLKOUNT < 4999999 ) THEN
+				
+					CLKOUNT <= CLKOUNT + 1;
+						
+				ELSIF CLKOUNT = 4999999 THEN
+				
+					STATE <= X;
+					
+				ELSE
+				
+					CLKOUNT <= 0;
+						
+				END IF;
+				
+		END IF;
+		
+		XD <= STATE;
+		
+		END PROCESS;
+		
+		PROCESS (XD)
+		BEGIN
+		
+		IF XD = '0' THEN
+			
+			CONTAGEM <= CONTAGEM + 1;
+		
+		END IF;
+		
+			CASE CONTAGEM IS
+				WHEN 0 => y <= "100";
+				WHEN 1 => y <= "010";
+				WHEN 2 => y <= "001";
+				WHEN OTHERS => y <= "000";
+			END CASE;
+			
+		END PROCESS;
+
+END MaqEstLED;
