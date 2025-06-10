@@ -20,47 +20,47 @@ SIGNAL XD : STD_LOGIC := '0';
 --SIGNAL XDTEMP : STD_LOGIC := '0';
 
 BEGIN
-		PROCESS (CLK)
-		BEGIN
+	PROCESS (CLK)
+	BEGIN
 		
-		IF RISING_EDGE(CLK) THEN
+	IF RISING_EDGE(CLK) THEN
 		
-				IF ( X /= STATE ) AND ( CLKOUNT < 4999999 ) THEN
+		IF ( X /= STATE ) AND ( CLKOUNT < 4999999 ) THEN
 				
-					CLKOUNT <= CLKOUNT + 1;
+			CLKOUNT <= CLKOUNT + 1;
 						
-				ELSIF CLKOUNT = 4999999 THEN
+		ELSIF CLKOUNT = 4999999 THEN
 				
-					STATE <= X;
+			STATE <= X;
 					
-				ELSE
+		ELSE
 				
-					CLKOUNT <= 0;
-						
-				END IF;
-				
-		END IF;
-		
-		XD <= STATE;
-		
-		END PROCESS;
-		
-		PROCESS (XD)
-		BEGIN
-		
-		IF XD = '0' THEN
-			
-			CONTAGEM <= CONTAGEM + 1;
+			CLKOUNT <= 0;
 		
 		END IF;
+
+	END IF;
 		
-			CASE CONTAGEM IS
-				WHEN 0 => y <= "100";
-				WHEN 1 => y <= "010";
-				WHEN 2 => y <= "001";
-				WHEN OTHERS => y <= "000";
-			END CASE;
+	XD <= STATE;
+		
+END PROCESS;
+		
+PROCESS (XD)
+BEGIN
+		
+	IF XD = '0' THEN
 			
-		END PROCESS;
+		CONTAGEM <= CONTAGEM + 1;
+		
+	END IF;
+		
+	CASE CONTAGEM IS
+		WHEN 0 => y <= "100";
+		WHEN 1 => y <= "010";
+		WHEN 2 => y <= "001";
+		WHEN OTHERS => y <= "000";
+	END CASE;
+			
+END PROCESS;
 
 END MaqEstLED;
