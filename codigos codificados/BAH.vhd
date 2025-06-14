@@ -1,4 +1,4 @@
-library ieee;
+allibrary ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
@@ -38,14 +38,20 @@ begin
 		IF rising_edge(clk) THEN
 				case maquina is
 					when afk =>
+
+						Serial <= '0';
+						LetsTalk <= '0';
+					
 						IF temporizador < 50000000 then --para simulação usar 5000
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo 1 segundo
 							if qual_das_duas = 0 then
 								maquina <= sequencia_1;
+								LetsTalk <= '1';
 								qual_das_duas <= 1;
 							else
-								maquina <= sequencia_2; 
+								maquina <= sequencia_2;
+								LetsTalk <= '1';
 								qual_das_duas <= 0;
 							end if; 
 						end if;
@@ -55,7 +61,7 @@ begin
 						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0; 
 							if i < 8 then
-								saida(i) <= entrada; -- o bit "i" do bus saída recebe o bit atual da entrada
+								Serial <= seq_1(i); -- o bit "i" da sequencia atual
 								i <= i + 1;	
 							else -- se já se passaram 8 bits, quer dizer que a mensagem foi recebida
 								maquina <= bit_final; 
