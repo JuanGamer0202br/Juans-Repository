@@ -22,7 +22,7 @@ architecture uart_buz of TCHE is
 -- Para simulação usar 50
 
 	COMPONENT BAH -- estou chamando BAH (o meu outro código vhdl que gera sinais seriais uart) ai eu recebo a saída de BAH aqui
-		port(LetsTalk, Serial : out std_logic; relogiows: in std_logic;);
+		port(LetsTalk, Serial : out std_logic; relogiows: in std_logic);
 	END COMPONENT;
 	
 	signal contagem : integer range 0 to 5208 := 0;
