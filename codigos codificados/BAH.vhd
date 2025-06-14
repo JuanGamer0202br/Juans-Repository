@@ -38,9 +38,10 @@ begin
 		IF rising_edge(clk) THEN
 				case maquina is
 					when afk =>
-
+						
 						Serial <= '0';
 						LetsTalk <= '0';
+						i <= 0;
 					
 						IF temporizador < 50000000 then --para simulação usar 5000
 							CONTAGEM <= CONTAGEM + 1;
@@ -59,20 +60,27 @@ begin
 						IF CONTAGEM < 5208 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
-							contagem <= 0; 
+							contagem <= 0;
+								
 							if i < 8 then
 								Serial <= seq_1(i); -- o bit "i" da sequencia atual
 								i <= i + 1;	
 							else -- se já se passaram 8 bits, quer dizer que a mensagem foi recebida
-								maquina <= bit_final; 
+								maquina <= afk; 
 							end if;
 						end if; 
-					when sequenci =>
-						IF CONTAGEM < 5208 THEN --para simulação usar 50
+					when sequencia_2 =>
+						IF CONTAGEM < 5208 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
-						ELSE
+						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0;
-							maquina <= em_espera; -- o bit final de stop foi recebido e portanto a comunicação acabou, voltar ao estado de espera caso algo novo chegue
+								
+							if i < 8 then
+								Serial <= seq_2(i); -- o bit "i" da sequencia atual
+								i <= i + 1;	
+							else -- se já se passaram 8 bits, quer dizer que a mensagem foi recebida
+								maquina <= afk; 
+							end if;
 						end if;
 				end case;
 		end if;
