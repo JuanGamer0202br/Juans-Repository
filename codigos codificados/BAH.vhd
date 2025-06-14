@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity BAH is
 	port (
-		relogiows: in std_logic;
+		relogiows : in std_logic;
 		LetsTalk, Serial : out std_logic
 	);
 end entity;
@@ -19,29 +19,37 @@ architecture uart_generator of BAH is
 -- valor a ser contado =
 -- (50000000)/(9600) = ~5208 (valor calculado que um processador de 50Mhz deve usar para se comunicar em 9.6Khz)
 -- Para simulação usar 50
-	
+
+	signal temporizador : integer range 0 to 50000000 := 0; -- vou querer trocar entre os modos da maquina de 1 em 1 segundo
 	signal contagem : integer range 0 to 5208 := 0;
-	signal i : integer range 0 to 8 := 0; -- o processador vai usar esse sinal para lembrar qual dos 8 bits ele está lendo
-	TYPE estados IS (em_espera,primeiro_bit,dados,bit_final); -- usamos uma maquina de estados, o vdhl não é uma linguagem sequencial, por isso precisamos garantir que partes do código só sejam executadas em um estado especifico
-	signal maquina : estados := em_espera; -- por padrão iniciamos a maquina no estado de espera, isso é, esperando até que uma transferencia seja iniciada
-	signal inicio_old : std_logic := '0'; -- inicio old armazena o estado anterior ao atual da variavel "inicio" na entidade, usamos isso para detectar se houve uma mudança em "inicio" sem usar "process()" já que não pode ter um "process" dentro de outro...  poxa vhdl
+	signal qual_das_duas : integer range 0 to 1 := 0;
+
+	signal i : integer range 0 to 8 := 0; -- o processador vai usar esse sinal para lembrar qual dos 8 bits ele está enviando
+	signal seq_1 : integer range 0 to 99999999 := 01000001; -- a sequencia 1 a ser enviada é a letra A de hex = 41, ali esta em binario
+	signal seq_2 : integer range 0 to 99999999 := 01000010; -- a sequencia 2 a ser enviada é a letra B de hex = 42, ali esta em binario
+
+	TYPE estados IS ( afk , sequencia_1 , sequencia_2 ); -- usamos uma maquina de estados, o vdhl não é uma linguagem sequencial, por isso precisamos garantir que partes do código só sejam executadas em um estado especifico
+	
+	signal maquina : estados := afk; -- por padrão iniciamos a maquina em away from keyboard
+
 begin
 	process(clk)
 	begin
 		IF rising_edge(clk) THEN
 				case maquina is
-					when em_espera =>
-						tx <= '0';
-						if inicio = '1' and inicio_old = '0' then -- o processador recebeu um pedido de comunicação 
-							i <= 0; -- i = 0 que dizer que ainda não lemos nenhum bit
-							maquina <= primeiro_bit; -- se preparando para receber o primeiro bit!!!! (esse primeiro bit tem que ser baixo e ele confirma que SIM queremos nos comunicar)
+					when afk =>
+						IF temporizador < 50000000 then --para simulação usar 5000
+							CONTAGEM <= CONTAGEM + 1;
+						ELSE -- já se passou o tempo 1 segundo
+							if qual_das_duas = 0 then
+								maquina <= sequencia_1;
+								qual_das_duas <= 1;
+							else
+								maquina <= sequencia_2; 
+								qual_das_duas <= 0;
+							end if; 
 						end if;
-						inicio_old <= inicio; -- atualiza inicio pra essa primeira condição não rodar mais não cara ta bom já a gente já tendeu que começou a comunicação
-					when primeiro_bit =>
-						saida <= "00000000"; -- certifica que o bus de saída ta limpo mesmo
-						tx <= '1'; -- tx fica ativo para confirmar que estamos nos comunicando
-						maquina <= dados; -- agora as coisas ficam interessantes
-					when dados =>
+					when sequencia_1 =>
 						IF CONTAGEM < 5208 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
@@ -53,7 +61,7 @@ begin
 								maquina <= bit_final; 
 							end if;
 						end if; 
-					when bit_final =>
+					when sequenci =>
 						IF CONTAGEM < 5208 THEN --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE
