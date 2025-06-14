@@ -28,7 +28,7 @@ architecture uart_generator of BAH is
 	signal seq_1 : integer range 0 to 99999999 := 01000001; -- a sequencia 1 a ser enviada é a letra A de hex = 41, ali esta em binario
 	signal seq_2 : integer range 0 to 99999999 := 01000010; -- a sequencia 2 a ser enviada é a letra B de hex = 42, ali esta em binario
 
-	TYPE estados IS ( afk , sequencia_1 , sequencia_2 ); -- usamos uma maquina de estados, o vdhl não é uma linguagem sequencial, por isso precisamos garantir que partes do código só sejam executadas em um estado especifico
+	TYPE estados IS ( afk , start , sequencia_1 , sequencia_2 , stop ); -- usamos uma maquina de estados, o vdhl não é uma linguagem sequencial, por isso precisamos garantir que partes do código só sejam executadas em um estado especifico
 	
 	signal maquina : estados := afk; -- por padrão iniciamos a maquina em away from keyboard
 
@@ -39,14 +39,25 @@ begin
 				case maquina is
 					when afk =>
 						
-						Serial <= '0';
+						Serial <= '1'; -- em quanto nada é executado, a linha de comunicação é mantida ALTA
 						LetsTalk <= '0';
-						i <= 0;
 					
 						IF temporizador < 50000000 then --para simulação usar 5000
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo 1 segundo
-							if qual_das_duas = 0 then
+							maquina <= start;
+						end if;
+					when start =>
+		
+						i <= 0;
+						Serial <= '0'; -- a linha de comunicação vai para BAIXO indicando que começamos a nos comunicar
+
+						contagem <= 0;
+
+						IF temporizador < 5208 then --para simulação usar 5000
+							CONTAGEM <= CONTAGEM + 1;
+						ELSE -- já se passou o tempo 1 segundo
+							if qual_das_duas = 0 then -- escolhe qual sequencia vamos enviar
 								maquina <= sequencia_1;
 								LetsTalk <= '1';
 								qual_das_duas <= 1;
