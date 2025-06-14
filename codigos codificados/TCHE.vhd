@@ -21,10 +21,12 @@ architecture uart_buz of TCHE is
 -- (50000000)/(9600) = ~5208 (valor calculado que um processador de 50Mhz deve usar para se comunicar em 9.6Khz)
 -- Para simulação usar 50
 
+	COMPONENT BAH -- estou chamando BAH (o meu outro código vhdl que gera sinais seriais uart) ai eu recebo a saída de BAH aqui
+		port(LetsTalk, Serial : out std_logic);
+	END COMPONENT;
+	
 	signal contagem : integer range 0 to 5208 := 0;
-	
 	signal i : integer range 0 to 8 := 0; -- o processador vai usar esse sinal para lembrar qual dos 8 bits ele está lendo
-	
 	TYPE estados IS (em_espera,primeiro_bit,dados,bit_final); -- usamos uma maquina de estados, o vdhl não é uma linguagem sequencial, por isso precisamos garantir que partes do código só sejam executadas em um estado especifico
 	signal maquina : estados := em_espera; -- por padrão iniciamos a maquina no estado de espera, isso é, esperando até que uma transferencia seja iniciada
 	signal inicio_old : std_logic := '0'; -- inicio old armazena o estado anterior ao atual da variavel "inicio" na entidade, usamos isso para detectar se houve uma mudança em "inicio" sem usar "process()" já que não pode ter um "process" dentro de outro...  poxa vhdl
