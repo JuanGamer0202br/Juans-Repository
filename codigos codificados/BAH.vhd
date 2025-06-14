@@ -41,32 +41,26 @@ begin
 						
 						Serial <= '1'; -- em quanto nada é executado, a linha de comunicação é mantida ALTA
 						LetsTalk <= '0';
-					
+						
 						IF temporizador < 50000000 then --para simulação usar 5000
-							CONTAGEM <= CONTAGEM + 1;
+							temporizador <= temporizador + 1;
 						ELSE -- já se passou o tempo 1 segundo
 							maquina <= start;
 						end if;
 					when start =>
 		
 						i <= 0;
-						Serial <= '0'; -- a linha de comunicação vai para BAIXO indicando que começamos a nos comunicar
-
+						LetsTalk <= '1'; -- envio uma solicitação de inicio da comunicação
+						Serial <= '0'; -- a linha de comunicação vai para BAIXO indicando que vamos começar a nos comunicar
 						contagem <= 0;
 
-						IF temporizador < 5208 then --para simulação usar 5000
-							CONTAGEM <= CONTAGEM + 1;
-						ELSE -- já se passou o tempo 1 segundo
-							if qual_das_duas = 0 then -- escolhe qual sequencia vamos enviar
+						if qual_das_duas = 0 then -- escolhe qual sequencia vamos enviar
 								maquina <= sequencia_1;
-								LetsTalk <= '1';
 								qual_das_duas <= 1;
-							else
+						else
 								maquina <= sequencia_2;
-								LetsTalk <= '1';
 								qual_das_duas <= 0;
-							end if; 
-						end if;
+						end if; 
 					when sequencia_1 =>
 						IF CONTAGEM < 5208 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
@@ -76,8 +70,8 @@ begin
 							if i < 8 then
 								Serial <= seq_1(i); -- o bit "i" da sequencia atual
 								i <= i + 1;	
-							else -- se já se passaram 8 bits, quer dizer que a mensagem foi recebida
-								maquina <= afk; 
+							else -- se já se passaram 8 bits, quer dizer que a mensagem foi enviada
+								maquina <= stop; 
 							end if;
 						end if; 
 					when sequencia_2 =>
@@ -89,9 +83,20 @@ begin
 							if i < 8 then
 								Serial <= seq_2(i); -- o bit "i" da sequencia atual
 								i <= i + 1;	
-							else -- se já se passaram 8 bits, quer dizer que a mensagem foi recebida
-								maquina <= afk; 
+							else -- se já se passaram 8 bits, quer dizer que a mensagem foi enviada
+								maquina <= stop; 
 							end if;
+						end if;
+					when stop =>
+		
+						Serial <= '1'; -- a linha de comunicação vai para ALTO indicando que terminamos de nos comunicar
+
+						IF CONTAGEM < 5208 then --para simulação usar 50
+							CONTAGEM <= CONTAGEM + 1;
+						ELSE -- já se passou o tempo de 1 bit
+							contagem <= 0;
+								
+							maquina <= afk;
 						end if;
 				end case;
 		end if;
