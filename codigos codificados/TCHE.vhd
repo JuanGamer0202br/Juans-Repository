@@ -24,6 +24,8 @@ architecture uart_buz of TCHE is
 	COMPONENT BAH -- estou chamando BAH (o meu outro código vhdl que gera sinais seriais uart) ai eu recebo a saída de BAH aqui
 		port(LetsTalk, Serial : out std_logic; relogiows: in std_logic);
 	END COMPONENT;
+
+	GeradorSerial : BAH PORT MAP (inicio <= LetsTalk, entrada <= Serial, relogiows <= clk); -- configurei as portas para comunicação entre meus códigos BAH e TCHE
 	
 	signal contagem : integer range 0 to 5208 := 0;
 
