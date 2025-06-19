@@ -2,12 +2,11 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity TCHE is
+entity MM is
 	port (
 		clk, inicio, entrada: in std_logic;
 		tx: out std_logic;
     	saida : out std_logic_vector(7 downto 0)
-		
 	);
 end entity;
 
@@ -15,7 +14,7 @@ end entity;
 --saida -> transmissão da informação em um BUS de 8 bits
 
 
-architecture uart_buz of TCHE is
+architecture uart_buz of MM is
 -- clk = 50Mhz
 -- baudrate da comunicação -> 9600
 -- valor a ser contado =
@@ -36,43 +35,30 @@ begin
 		IF rising_edge(clk) THEN
 				case maquina is
 					when em_espera =>
-					
-						
-						
 						tx <= '0';
 						if inicio = '1' and inicio_old = '0' then -- o processador recebeu um pedido de comunicação 
 							i <= 0; -- i = 0 que dizer que ainda não lemos nenhum bit
 							maquina <= primeiro_bit; -- se preparando para receber o primeiro bit!!!! (esse primeiro bit tem que ser baixo e ele confirma que SIM queremos nos comunicar)
-							contagem <= 0; 
 						end if;
 						inicio_old <= inicio; -- atualiza inicio pra essa primeira condição não rodar mais não cara ta bom já a gente já tendeu que começou a comunicação
 					when primeiro_bit =>
-						
 						saida <= "00000000"; -- certifica que o bus de saída ta limpo mesmo
 						tx <= '1'; -- tx fica ativo para confirmar que estamos nos comunicando
-						IF CONTAGEM < 25 then --para simulação usar 50
-							CONTAGEM <= CONTAGEM + 1;
-						ELSE -- já se passou o tempo de 1 bit
-							contagem <= 0; 
-							maquina <= dados; -- agora as coisas ficam interessantes
-						end if;
+						maquina <= dados; -- agora as coisas ficam interessantes
 					when dados =>
-					
-						IF CONTAGEM < 50 then --para simulação usar 50
+						IF CONTAGEM < 5208 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0; 
 							if i < 8 then
 								saida(i) <= entrada; -- o bit "i" do bus saída recebe o bit atual da entrada
-								i <= i + 1;
-								
+								i <= i + 1;	
 							else -- se já se passaram 8 bits, quer dizer que a mensagem foi recebida
 								maquina <= bit_final; 
 							end if;
 						end if; 
 					when bit_final =>
-				
-						IF CONTAGEM < 50 THEN --para simulação usar 50
+						IF CONTAGEM < 5208 THEN --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE
 							contagem <= 0;

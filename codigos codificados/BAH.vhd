@@ -25,27 +25,28 @@ architecture uart_generator of BAH is
 	signal qual_das_duas : integer range 0 to 1 := 0;
 
 	signal i : integer range 0 to 8 := 0; -- o processador vai usar esse sinal para lembrar qual dos 8 bits ele está enviando
-	signal seq_1 : integer range 0 to 99999999 := 01000001; -- a sequencia 1 a ser enviada é a letra A de hex = 41, ali esta em binario
-	signal seq_2 : integer range 0 to 99999999 := 01000010; -- a sequencia 2 a ser enviada é a letra B de hex = 42, ali esta em binario
+	signal seq_1 : std_logic_vector (7 downto 0) := "01000001"; -- a sequencia 1 a ser enviada é a letra A de hex = 41, ali esta em binario
+	signal seq_2 : std_logic_vector (7 downto 0) := "01000010"; -- a sequencia 2 a ser enviada é a letra B de hex = 42, ali esta em binario
 
 	TYPE estados IS ( afk , start , sequencia_1 , sequencia_2 , stop ); -- usamos uma maquina de estados, o vdhl não é uma linguagem sequencial, por isso precisamos garantir que partes do código só sejam executadas em um estado especifico
 	
 	signal maquina : estados := afk; -- por padrão iniciamos a maquina em away from keyboard
 
 begin
-	process(clk)
+	process(relogiows)
 	begin
-		IF rising_edge(clk) THEN
+		IF rising_edge(relogiows) THEN
 				case maquina is
 					when afk =>
 						
 						Serial <= '1'; -- em quanto nada é executado, a linha de comunicação é mantida ALTA
 						LetsTalk <= '0';
 						
-						IF temporizador < 50000000 then --para simulação usar 5000
+						IF temporizador < 500 then --para simulação usar 5000
 							temporizador <= temporizador + 1;
 						ELSE -- já se passou o tempo 1 segundo
 							maquina <= start;
+							temporizador <= 0;
 						end if;
 					when start =>
 		
@@ -62,7 +63,7 @@ begin
 								qual_das_duas <= 0;
 						end if; 
 					when sequencia_1 =>
-						IF CONTAGEM < 5208 then --para simulação usar 50
+						IF CONTAGEM < 50 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0;
@@ -75,7 +76,7 @@ begin
 							end if;
 						end if; 
 					when sequencia_2 =>
-						IF CONTAGEM < 5208 then --para simulação usar 50
+						IF CONTAGEM < 50 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0;
@@ -91,7 +92,7 @@ begin
 		
 						Serial <= '1'; -- a linha de comunicação vai para ALTO indicando que terminamos de nos comunicar
 
-						IF CONTAGEM < 5208 then --para simulação usar 50
+						IF CONTAGEM < 50 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0;
