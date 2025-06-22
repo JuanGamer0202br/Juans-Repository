@@ -111,7 +111,6 @@ begin
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0;
-							Talk <= '0';
 							maquina <= afk;
 						end if;
 				end case;
