@@ -51,7 +51,6 @@ begin
 								-- esse é o start de receber dados, baud aqui é 9600!!!!!!!
 						i <= 0;
 						Talk <= '1'; 
-						result <= '0';
 						
 						contagem <= 0;
 
@@ -61,6 +60,15 @@ begin
 							contagem <= 0; 
 							maquina <= lendo; -- agora as coisas ficam interessantes
 						end if;
+					when start48 =>
+								-- esse é o start de enviar dados, baud aqui é 4800!!!!!!!
+						i <= 0;
+						
+						contagem <= 0;
+						result <= 0;
+						
+						maquina <= enviando; -- agora as coisas ficam interessantes
+						
 					when lendo =>
 						IF CONTAGEM < 50 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
@@ -74,28 +82,36 @@ begin
 								maquina <= stop96; 
 							end if;
 						end if; 
-					when sequencia_2 =>
-						IF CONTAGEM < 50 then --para simulação usar 50
+					when enviando =>
+							-- aqui o baud é 4800!!!!!!
+						IF CONTAGEM < 100 then --para simulação usar 100
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0;
 								
 							if i < 8 then
-								Serial <= seq_2(i); -- o bit "i" da sequencia atual
+								result <= mensagem(i); -- o bit "i" da sequencia atual
 								i <= i + 1;	
 							else -- se já se passaram 8 bits, quer dizer que a mensagem foi enviada
-								maquina <= stop; 
+								maquina <= stop48; 
 							end if;
 						end if;
-					when stop =>
-		
-						Serial <= '1'; -- a linha de comunicação vai para ALTO indicando que terminamos de nos comunicar
+					when stop96 =>
 
-						IF CONTAGEM < 50 then --para simulação usar 50
+						IF CONTAGEM < 25 then -- metade do baud 9600
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0;
 								
+							maquina <= start48;
+						end if;
+					when stop48 =>
+								
+						IF CONTAGEM < 100 then -- metade do baud 9600
+							CONTAGEM <= CONTAGEM + 1;
+						ELSE -- já se passou o tempo de 1 bit
+							contagem <= 0;
+							Talk <= '0';
 							maquina <= afk;
 						end if;
 				end case;
