@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity GURI is
 	port (
 		clock , reciever : in std_logic;
-		Talk , result : out std_logic;
+		Talk , result : out std_logic
 	);
 end entity;
 
@@ -14,12 +14,12 @@ end entity;
 -- clock é só o clock mesmo
 -- result é a saída
 
-architecture uart_generator of GURI is
+architecture uart_generator2 of GURI is
 -- clk = 50Mhz
 -- baudrate da comunicação -> 9600
 -- valor a ser contado =
--- (50000000)/(9600) = ~5208 (valor calculado que um processador de 50Mhz deve usar para se comunicar em 9.6Khz)
--- Para simulação usar 50
+-- (50000000)/(4800) = ~10417 (valor calculado que um processador de 50Mhz deve usar para se comunicar em 4.8Khz)
+-- Para simulação usar 100
 
 	signal temporizador : integer range 0 to 50000000 := 0; -- vou querer trocar entre os modos da maquina de 1 em 1 segundo
 	signal contagem : integer range 0 to 5208 := 0;
@@ -101,4 +101,4 @@ begin
 				end case;
 		end if;
 	end process;
-end uart_generator;
+end uart_generator2;
