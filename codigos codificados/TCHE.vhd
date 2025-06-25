@@ -50,7 +50,7 @@ begin
 						
 						saida <= "00000000"; -- certifica que o bus de saída ta limpo mesmo
 						tx <= '1'; -- tx fica ativo para confirmar que estamos nos comunicando
-						IF CONTAGEM < 25 then --para simulação usar 50
+						IF CONTAGEM < 2604 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0; 
@@ -58,7 +58,7 @@ begin
 						end if;
 					when dados =>
 					
-						IF CONTAGEM < 50 then --para simulação usar 50
+						IF CONTAGEM < 5208 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0; 
@@ -72,7 +72,7 @@ begin
 						end if; 
 					when bit_final =>
 				
-						IF CONTAGEM < 50 THEN --para simulação usar 50
+						IF CONTAGEM < 5208 THEN --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE
 							contagem <= 0;

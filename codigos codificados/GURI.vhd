@@ -65,7 +65,7 @@ begin
 						i <= 0;
 						
 						contagem <= 0;
-						result <= 0;
+						result <= '0';
 						
 						maquina <= enviando; -- agora as coisas ficam interessantes
 						

@@ -42,7 +42,7 @@ begin
 						Serial <= '1'; -- em quanto nada é executado, a linha de comunicação é mantida ALTA
 						LetsTalk <= '0';
 						
-						IF temporizador < 500 then --para simulação usar 5000
+						IF temporizador < 50000 then --para simulação usar 5000
 							temporizador <= temporizador + 1;
 						ELSE -- já se passou o tempo 1 segundo
 							maquina <= start;
@@ -63,7 +63,7 @@ begin
 								qual_das_duas <= 0;
 						end if; 
 					when sequencia_1 =>
-						IF CONTAGEM < 50 then --para simulação usar 50
+						IF CONTAGEM < 5208 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0;
@@ -76,7 +76,7 @@ begin
 							end if;
 						end if; 
 					when sequencia_2 =>
-						IF CONTAGEM < 50 then --para simulação usar 50
+						IF CONTAGEM < 5208 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0;
@@ -92,7 +92,7 @@ begin
 		
 						Serial <= '1'; -- a linha de comunicação vai para ALTO indicando que terminamos de nos comunicar
 
-						IF CONTAGEM < 50 then --para simulação usar 50
+						IF CONTAGEM < 5208 then --para simulação usar 50
 							CONTAGEM <= CONTAGEM + 1;
 						ELSE -- já se passou o tempo de 1 bit
 							contagem <= 0;
