@@ -3,7 +3,7 @@ USE IEEE.std_logic_1164.all;
 
 ENTITY Piano_PS2 IS
 	PORT (
-		onboard_clk , keyboard_clk : in std_logic;
+		onboard_clk , keyboard_clk , data_in : in std_logic;
 		buzzer : out std_logic
 	);
 	
