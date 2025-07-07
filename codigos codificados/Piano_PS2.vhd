@@ -20,6 +20,8 @@ SIGNAL BUZZ : std_logic := '0';
 -- portanto faço ( ( 50000000 / 440 ) / 2 ) = 56818 (dividido por 2 por que um sinal é formado metade por uma subida e metade uma decida)
 
 BEGIN
+
+-- processos relacionados a audio ------------------------------------------------------------------------------------------------------
 	
 	PROCESS(onboard_clk)
 	BEGIN
@@ -62,6 +64,8 @@ BEGIN
 	END IF;
 	
 	END PROCESS;
+
+-----------------------------------------------------------------------------------------------------------------------------------------
 	
 END Main;
 	
