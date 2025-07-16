@@ -4,8 +4,8 @@ USE IEEE.std_logic_1164.all;
 ENTITY Piano_PS2 IS
 	PORT (
 		onboard_clk , keyboard_clk , data_in : in std_logic;
-		buzzer : out std_logic;
-		test : out std_logic_vector (7 downto 0)
+		buzzer : out std_logic
+		
 	);
 
 	-- onboard_clk é para o clock da Max II
@@ -31,16 +31,17 @@ SIGNAL BUZZ : std_logic := '0';
 -- SEGUNDO é usado para contar o tempo de um segundo (1 clock de 50 Mhz na Max II)
 -- BUZZ a linha interna que sera usada para fazer interface entre o pino físico e o sinal gerado
 
-TYPE estados IS (standby , first , data , parity , final); -- usamos uma maquina de estados, o vdhl não é uma linguagem sequencial, por isso precisamos garantir que partes do código só sejam executadas em um estado especifico
+TYPE estados IS (first , data , parity , final); -- usamos uma maquina de estados, o vdhl não é uma linguagem sequencial, por isso precisamos garantir que partes do código só sejam executadas em um estado especifico
 -- standby = em espera de comunicação
 -- first = primeiro bit, se preparando para receber um comando
 -- data = le e decodifica o comando recebido
 -- parity = não faz nada, mas precisa ser seu estado próprio porque o teclado ainda manda...
 -- final = fim da comunicação, verifica se o comando é valido
 
-SIGNAL maquina : estados := standby; -- por padrão iniciamos a maquina no estado de espera, isso é, esperando até que uma transferencia seja iniciada
+SIGNAL maquina : estados := first; -- por padrão iniciamos a maquina no estado de espera, isso é, esperando até que uma transferencia seja iniciada
 SIGNAL i : integer RANGE 0 TO 10 := 0; -- usada pelo programa para marcar qual bit esta sendo lido no estado "data"
 SIGNAL code : std_logic_vector (7 downto 0) := "00000000"; -- local onde o comando decodificado é armazenado
+SIGNAL test : std_logic_vector (7 downto 0);
 
 BEGIN
 
@@ -74,12 +75,51 @@ BEGIN
 	
 	IF RISING_EDGE(onboard_clk) THEN
 	
-		IF code = "00011100" THEN -- se o ultimo comando recebido for "00011100" ou "1C" em hexadecimal, então a tecla "a" foi apertada
+	CASE code IS
+		WHEN "00011100" => -- se o ultimo comando recebido for "00011100" ou "1C" em hexadecimal, então a tecla "A" foi apertada
 
-			BFREQ <= "5952"; -- muda a frequência para a desejada para a tecla "a"
+			BFREQ <= 23900; -- muda a frequência para a desejada para a tecla "a"
 			buzzer <= BUZZ; -- libera o tom gerado para o buzzer
+			
+		WHEN "00110011" => -- "H"
+
+			BFREQ <= 15954; 
+			buzzer <= BUZZ;
 		
-		END IF;
+		WHEN "00100011" => -- "s"
+
+			BFREQ <= 18968; 
+			buzzer <= BUZZ; 
+		
+		WHEN "00011011" => -- "D"
+
+			BFREQ <= 21294; 
+			buzzer <= BUZZ; 
+		
+		WHEN "00101011" => -- "F"
+
+			BFREQ <= 17908; 
+			buzzer <= BUZZ; 
+		
+		WHEN "00111011" => -- "J"
+
+			BFREQ <= 14204; 
+			buzzer <= BUZZ; 
+		
+		WHEN "01000010" => -- "K"
+
+			BFREQ <= 12658; 
+			buzzer <= BUZZ; 
+		
+		WHEN "01001011" => -- "L"
+
+			BFREQ <= 11944; 
+			buzzer <= BUZZ; 
+		
+		WHEN OTHERS =>
+		
+	END CASE;
+	
 	END IF;
 	
 	END PROCESS;
@@ -94,34 +134,30 @@ BEGIN
 	
 		CASE maquina IS
 		
-			WHEN standby =>
+			WHEN first =>	
 				
-				test <= "00000000";	
-				maquina <= first; -- se preparando para receber o primeiro bit!!!!
-
-			WHEN first =>
-			
-				code <= "00000000"; -- certifica que o bus de saída ta limpo mesmo
-						
 				IF ( data_in = '0' ) THEN -- (esse primeiro bit tem que ser baixo e ele confirma que SIM o teclado esta tentando dizer algo)
 
+					i <= 0; -- i = 0 que dizer que ainda não lemos nenhum bit
 					maquina <= data; -- agora as coisas ficam interessantes
 					
 				END IF;
+
+
 			WHEN data =>
-				
-				i <= 0; -- i = 0 que dizer que ainda não lemos nenhum bit
 				
 				IF i < 8 THEN
 					
 					code(i) <= data_in; -- o bit "i" do bus saída recebe o bit atual da entrada
 					i <= i + 1;
-								
-				ELSE -- se já se passaram 8 bits, quer dizer que a mensagem foi recebida
 					
-					maquina <= parity; 
+				END IF;
+				IF i = 7 THEN
+					
+						maquina <= parity; 
 						
 				END IF;
+					
 			WHEN parity =>
 			
 				--vou ignorar o bit de paridade pois ele é opcional ¯\_(ツ)_/¯
@@ -130,18 +166,9 @@ BEGIN
 			
 		
 			WHEN final =>
-			
-				IF data_in = '1' THEN -- bit final obrigatorio de valor ALTO FOI recebido, aceitar os dados e voltar a espera
-					
-					test <= code;
-					maquina <= standby; 	
-			
-				ELSE -- bit final obrigatorio de valor ALTO NÃO foi recebido, rejeitar os dados e voltar a espera
-					
-					code <= "00000000";
-					maquina <= standby;
 				
-				END IF;
+				test <= code;
+				maquina <= first; 	
 			
 			WHEN OTHERS =>
 		END CASE;
