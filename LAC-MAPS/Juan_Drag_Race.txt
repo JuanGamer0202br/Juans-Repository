@@ -1,0 +1,234 @@
+Map Name:Juan_Drag_Race
+Map Type:0
+Holo Sign:0.0, 0.1, 0.0*JUAN DRAG RACE TUTORIAL: Only two player at a time, wait for your round, wait until the lights go green, stay behind the green line
+Camera Pos:-27.46, 17.58, 21.32:15.15, 30.81, 0.00
+Chat Cooldown: 0.0
+Max Vehicle Count: 4
+Fuel Consume Rate: 2
+Delete Idle Vehicle: 60
+Vehicle Collision: true
+Health Regeneration: true
+Hide Names: false
+Allow Respawn: true
+Voice-Chat: enabled
+Vote For Role: disabled
+Role-play: disabled
+Approve On Register: false
+Roles List:<color=yellow>[TAXI]</color>,<color=#C7C>[WORKER]</color>,[BUILDER],<color=green>[DOCTOR]</color>,<color=orange>[MECHANIC]</color>,<color=blue>[POLICE]</color>,<color=#FF00CC>[MODERATOR]</color>,<color=red>[ADMIN]</color>,
+Spawn_Point_Editor:0.00,0.00,0.00:0.00,0.00,0.00:1.00,1.00,1.00: 
+Trigger_Box_Editor:10.00,-8.00,71.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|chat{<color=red><i>Jumped the line, race invalidated!</i></color>}
+Trigger_Box_Editor:0.00,-14.00,71.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|tip{<color=red><i>one of the Players launched on the red light, race cancelled</i></color>}|executeplayer{}
+Trigger_Box_Editor:0.00,16.00,673.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|camsequence{5;0,1,660;0,0,0*5;-40,100,90;310,90,0}|camtranslate{4;0,0,0;0,0,0*1;0,100,0;-50,0,0*1;0,-100,0;50,0,0*4;0,0,0;0,0,0}|calltriggerbox{20,17,0*10}|calltriggerbox{0,19,673}|calltriggerbox{0,19,673*4}|calltriggerbox{0,19,673*6}|calltriggerbox{0,-5,71*10}
+Speed_Booster_Editor:0.00,-0.20,676.00:0.00,0.00,0.00:4.00,1.00,1.00: 
+Speed_Booster_Editor:0.00,-0.20,676.00:0.00,0.00,0.00:4.00,1.00,1.00: 
+Speed_Booster_Editor:0.00,-0.20,676.00:0.00,0.00,0.00:4.00,1.00,1.00: 
+Trigger_Box_Editor:0.00,1.50,693.00:0.00,0.00,0.00:36.00,7.00,40.00:mode{enter}|ifcondition{global_float_a>global_float_b&&global_string_b=[playername]}|globalvar{set*global_string_c*global_string_b}|chat{<color=orange><i>finished in 1th place</i></color>}|cooldown{5}
+Trigger_Box_Editor:0.00,18.00,52.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{loop}|effect{reverbzone*1000*Quarry}
+Trigger_Box_Editor:0.00,4.00,693.00:0.00,0.00,0.00:36.00,7.00,40.00:mode{enter}|ifcondition{global_float_a<global_float_b&&global_string_a=[playername]}|globalvar{set*global_string_c*global_string_a}|chat{<color=orange><i>finished in 1th place</i></color>}|cooldown{5}
+Trigger_Box_Editor:0.00,4.00,671.40:0.00,0.00,0.00:36.00,7.00,3.00:mode{enter}|ifcondition{global_string_b=[playername]}|globalvar{set*global_string_e*N}|calltriggerbox{0,16,673}
+Trigger_Box_Editor:-6.00,-3.00,79.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|calltriggerbox{-8,-6,81}|calltriggerbox{-8,-9,81*0.5}|calltriggerbox{-8,-12,81*1}|calltriggerbox{-8,-15,81*1.5}|calltriggerbox{-8,-18,81*2}|calltriggerbox{-5,-18,81*2}|calltriggerbox{-8,-21,81*5}|draw{halo}|cooldown{10}
+Trigger_Box_Editor:0.00,2.60,55.00:0.00,0.00,0.00:35.00,5.00,27.00:mode{enter}|ifcondition{isinvehicle=false&&global_float_d=0}|player{respawn}
+Trigger_Box_Editor:9.00,2.00,71.00:0.00,0.00,0.00:17.50,5.00,3.00:mode{enter}|ifcondition{global_float_c=1&&global_float_d=0&&global_string_b=[playername]}|calltriggerbox{0,-5,71}|calltriggerbox{0,-14,71}|calltriggerbox{10,-8,71*1}|cooldown{10}
+Trigger_Box_Editor:20.00,17.00,0.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|globalvar{set*global_string_a*uhhhh}|globalvar{set*global_string_b*uhhhh}|globalvar{set*global_string_c*uhhhh}|globalvar{set*global_string_d*N}|globalvar{set*global_string_e*N}|globalvar{set*global_float_a*0}|globalvar{set*global_float_b*0}|globalvar{set*global_float_c*0}|globalvar{set*global_float_d*0}|globalvar{set*global_float_e*0}
+Trigger_Box_Editor:-8.50,2.00,71.00:0.00,0.00,0.00:17.50,5.00,3.00:mode{enter}|ifcondition{global_float_c=1&&global_float_d=0&&global_string_a=[playername]}|calltriggerbox{0,-5,71}|calltriggerbox{0,-14,71}|calltriggerbox{10,-8,71*1}|cooldown{10}
+Trigger_Box_Editor:-30.00,-4.00,-23.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|globalvar{set*global_float_c*1}|calltriggerbox{-30,-7,-23*4}|calltriggerbox{-30,-10,-23*8}|calltriggerbox{-30,-4,-26*16}|calltriggerbox{-30,-4,-20*0.1}|draw{halo}
+Spotlight_Editor:21.00,2.70,90.50:298.00,90.00,0.00:1.00,1.00,1.00:color{1.00,1.00,1.00} light{55,113,0,1}
+UI_Scalable_Editor:28.70,3.00,90.50:0.00,90.00,0.00:20.40,20.00,1.00:<color=black><font=pricedown><size=100>Winner; <color=yellow>global_string_c
+UI_Scalable_Editor:28.70,10.50,97.50:0.00,90.00,0.00:11.00,10.00,1.00:<color=orange><font=pricedown><size=150>global_string_a|<size=200><color=black>Time; global_float_a
+UI_Scalable_Editor:28.70,10.50,83.50:0.00,90.00,0.00:11.00,10.00,1.00:<color=orange><font=pricedown><size=150>global_string_b|<size=200><color=black>time; global_float_b
+Square_Plank_Editor:29.60,0.00,79.80:0.00,0.00,0.00:0.50,0.40,1.80: 
+Square_Plank_Editor:41.90,0.00,79.80:0.00,0.00,0.00:0.40,0.40,1.80: 
+Square_Plank_Editor:35.00,8.20,79.80:0.00,0.00,0.00:0.40,0.40,1.80: 
+Square_Plank_Editor:42.00,0.00,100.50:310.00,270.00,270.00:0.30,0.30,1.60: 
+Square_Plank_Editor:42.00,0.00,80.50:310.00,270.00,270.00:0.30,0.30,1.60: 
+Square_Plank_Editor:42.00,0.00,90.50:310.00,270.00,270.00:0.30,0.30,1.60: 
+Square_Plank_Editor:29.80,11.00,79.80:0.00,0.00,0.00:0.40,0.40,1.80: 
+Square_Plank_Editor:29.80,3.70,79.80:0.00,0.00,0.00:0.40,0.40,1.80: 
+Square_Plank_Editor:29.60,0.00,90.50:270.00,0.00,0.00:0.40,0.40,1.30: 
+Square_Plank_Editor:29.60,0.00,80.50:270.00,0.00,0.00:0.40,0.40,1.30: 
+Wooden_Plank_Editor:27.80,6.00,90.50:0.00,0.00,0.00:1.40,1.00,2.00: 
+Block_Scalable_Editor:29.00,7.00,90.50:0.00,90.00,0.00:28.50,11.00,0.40:color{1.00,1.00,1.00}
+Square_Plank_Editor:29.60,0.00,100.50:270.00,0.00,0.00:0.40,0.40,1.30: 
+Blackboard_Big_Editor:-34.00,0.00,72.00:0.00,0.00,0.00:1.00,1.00,1.00:.|DISCLAIMER||As a crowd member of the Juan Drag Race, <color=red>you</color> agree to understand that <color=red>you</color> maybe subjected to;||- Loud noise (ear damage)|- Flying debri|- Being runover|- Dismemberment|- Life alterning injuries|- Depression|- Waiting on a line||Enjoy|
+Speed_Booster_Editor:0.00,-1.50,69.50:270.00,0.00,0.00:4.30,2.00,0.20: 
+Spotlight_Editor:0.00,0.30,36.00:317.00,0.00,0.00:1.00,1.00,1.00:color{1.00,1.00,1.00} light{45,105,0,1}
+Spotlight_Editor:17.90,14.00,53.00:28.00,330.00,0.00:3.00,3.00,3.00:color{1.00,1.00,1.00} light{75,100,0,1}
+Spotlight_Editor:-17.70,14.00,53.00:28.00,30.00,0.00:3.00,3.00,3.00:color{1.00,1.00,1.00} light{75,100,0,1}
+Entrance_Tire_Editor:-36.00,-7.00,90.50:0.00,90.00,0.00:0.80,0.80,0.10: 
+Maxwell_Editor:0.00,10.00,78.50:0.00,0.00,0.00:1.00,1.00,1.00:animation{maxwell_idle}
+Sofa_Chunk_Editor:0.00,6.30,78.00:0.00,90.00,90.00:1.30,0.90,1.60:color{0.05,0.05,0.05}
+Pipe_90_Editor:-0.60,7.20,78.00:0.00,180.00,0.00:0.30,0.30,0.30:color{0.80,0.80,0.80} material{MetalBare0212,0.01}
+Trigger_Box_Editor:60.00,13.00,-70.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{loop}|weather{clear}|cooldown{1}|draw{halo}
+Road_Racing_Wide_Editor:0.00,-0.50,80.20:0.00,0.00,0.00:1.00,1.00,1.00: 
+Trigger_Box_Editor:-8.00,-21.00,81.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|transform{0,3.8,77.5*0,-4,77.5*999}
+Trigger_Box_Editor:-5.00,-18.00,81.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|transform{0,-4,77.5*0,3.8,77.5*999}|globalvar{set*global_float_d*1}|globalvar{set*global_string_d*Y}|globalvar{set*global_string_e*Y}|globalvar{set*global_float_a*0}|globalvar{set*global_float_b*0}|sound{PianoC5*1*100*false*false*50*true}
+Trigger_Box_Editor:-8.00,-18.00,81.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|transform{0,4.6,77.5*0,-2,77.5*999}
+Trigger_Box_Editor:-8.00,-15.00,81.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|transform{0,5.4,77.5*0,4.6,77.5*999}|sound{PianoC5*1*100*false*false*30*true}
+Trigger_Box_Editor:-8.00,-12.00,81.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|transform{0,6.2,77.5*0,5.4,77.5*999}|sound{PianoC5*1*100*false*false*30*true}
+Trigger_Box_Editor:-8.00,-9.00,81.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|transform{0,7,77.5*0,6.2,77.5*999}|sound{PianoC5*1*100*false*false*30*true}
+Trigger_Box_Editor:-8.00,-6.00,81.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|transform{0,-2,77.5*0,7,77.5*999}|sound{PianoC5*1*100*false*false*30*true}
+UI_Scalable_Editor:0.00,-4.00,77.50:0.00,0.00,0.00:3.00,3.00,1.00:<color=green><size=500>●  ●
+UI_Scalable_Editor:0.00,-2.00,77.50:0.00,0.00,0.00:3.00,3.00,1.00:<color=red><size=500>●  ●
+Pipe_90_Editor:-0.60,4.80,78.00:0.00,180.00,0.00:0.30,0.30,0.30:color{0.80,0.80,0.80} material{MetalBare0212,0.01}
+Pipe_90_Editor:0.90,4.80,77.70:0.00,270.00,0.00:0.30,0.30,0.30:color{0.80,0.80,0.80} material{MetalBare0212,0.01}
+Pipe_90_Editor:-0.60,5.60,78.00:0.00,180.00,0.00:0.30,0.30,0.30:color{0.80,0.80,0.80} material{MetalBare0212,0.01}
+Pipe_90_Editor:0.90,5.60,77.70:0.00,270.00,0.00:0.30,0.30,0.30:color{0.80,0.80,0.80} material{MetalBare0212,0.01}
+Pipe_90_Editor:0.90,6.40,77.70:0.00,270.00,0.00:0.30,0.30,0.30:color{0.80,0.80,0.80} material{MetalBare0212,0.01}
+Pipe_90_Editor:-0.60,6.40,78.00:0.00,180.00,0.00:0.30,0.30,0.30:color{0.80,0.80,0.80} material{MetalBare0212,0.01}
+Pipe_90_Editor:0.90,7.20,77.70:0.00,270.00,0.00:0.30,0.30,0.30:color{0.80,0.80,0.80} material{MetalBare0212,0.01}
+Pipe_90_Editor:0.90,8.00,77.70:0.00,270.00,0.00:0.30,0.30,0.30:color{0.80,0.80,0.80} material{MetalBare0212,0.01}
+Pipe_90_Editor:-0.60,8.00,78.00:0.00,180.00,0.00:0.30,0.30,0.30:color{0.80,0.80,0.80} material{MetalBare0212,0.01}
+Ladder_Editor:-0.50,11.00,78.50:0.00,90.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:0.00,11.00,79.00:0.00,180.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:0.50,11.00,78.50:0.00,90.00,180.00:1.20,2.10,1.50: 
+Road_Barrier_Editor:0.00,0.00,73.00:0.00,90.00,0.00:1.80,1.20,1.00: 
+Ladder_Editor:0.00,18.00,52.00:0.00,180.00,180.00:3.00,5.00,3.00: 
+Trigger_Box_Editor:63.00,13.00,-70.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{loop}|ifcondition{weapon!=0}|chat{<i>brought a gun to a car fight</i>}|teleport{0,1000,0}|tip{what are you trying to do lil man?}|weapon{0}|cooldown{1}|draw{halo}
+Road_Racing_Wide_Editor:0.00,-0.50,45.00:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,115.40:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,150.60:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,185.80:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,221.00:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,256.20:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,291.41:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,326.61:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,361.81:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,397.01:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,432.20:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,467.40:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,502.60:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,537.80:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,572.99:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,608.18:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Racing_Wide_Editor:0.00,-0.50,643.37:0.00,0.00,0.00:1.00,1.00,1.00: 
+Spawn_Point_Editor:10.00,0.00,0.00:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Barrier_Editor:0.00,0.00,45.00:0.00,90.00,0.00:1.80,1.20,1.00: 
+Road_Barrier_Editor:0.00,0.00,52.00:0.00,90.00,0.00:1.80,1.20,1.00: 
+Road_Barrier_Editor:0.00,0.00,59.10:0.00,90.00,0.00:1.80,1.20,1.00: 
+Road_Barrier_Editor:0.00,0.00,66.00:0.00,90.00,0.00:1.80,1.20,1.00: 
+Ladder_Editor:-19.30,18.00,52.00:0.00,180.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:-20.60,18.00,50.70:0.00,90.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:-18.00,18.00,50.70:0.00,90.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:-19.30,18.00,49.40:0.00,180.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:19.30,18.00,49.40:0.00,180.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:20.60,18.00,50.70:0.00,90.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:19.30,18.00,52.00:0.00,180.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:18.00,18.00,50.70:0.00,90.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:1.30,18.00,50.70:0.00,90.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:0.00,18.00,49.40:0.00,180.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:-1.30,18.00,50.70:0.00,90.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:0.00,11.00,78.00:0.00,180.00,180.00:1.20,2.10,1.50: 
+Block_Scalable_Editor:0.00,9.40,49.00:0.00,0.00,0.00:44.00,5.00,0.40:color{1.00,1.00,1.00}
+UI_Scalable_Editor:0.00,9.40,48.70:0.00,0.00,0.00:8.00,7.00,1.00:<color=#871><font=pricedown><size=700>VS
+UI_Scalable_Editor:-9.00,8.50,48.70:0.00,0.00,0.00:11.00,10.00,1.00:<color=black><font=pricedown><size=180>global_string_a
+UI_Scalable_Editor:9.00,8.50,48.70:0.00,0.00,0.00:11.00,10.00,1.00:<color=black><font=pricedown><size=180>global_string_b
+Ladder_Editor:-33.60,7.70,80.90:0.00,180.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:-31.00,5.80,80.90:0.00,180.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:-33.60,7.70,90.00:0.00,180.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:-33.60,7.70,100.00:0.00,180.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:-31.00,5.80,90.10:0.00,180.00,180.00:3.00,5.00,3.00: 
+Ladder_Editor:-31.00,5.80,100.10:0.00,180.00,180.00:3.00,5.00,3.00: 
+Wooden_Plank_Editor:-31.00,2.41,90.50:0.00,0.00,0.00:1.50,2.00,1.60: 
+Wooden_Plank_Editor:-33.60,4.30,90.50:0.00,0.00,0.00:1.50,2.00,1.60: 
+Stair_Editor:-26.00,-0.10,78.50:0.00,90.00,0.00:1.20,1.20,1.20: 
+Garage_Editor:77.00,0.00,-42.00:0.00,0.00,0.00:1.00,1.00,1.00: 
+Spawn_Point_Editor:20.00,0.00,0.00:0.00,0.00,0.00:1.00,1.00,1.00: 
+Blackboard_Big_Editor:-24.56,0.00,41.93:0.00,30.00,0.00:1.00,1.00,1.00:PEDESTRIANS|BE AWARE OF <b>ROTATED LADDERS</b>||APROACH THEM AT YOUR OWN RISK
+Block_Scalable_Editor:-37.50,-0.80,0.00:0.00,0.00,0.00:25.00,1.00,30.00:color{0.00,0.00,0.50}
+Road_Barrier_Editor:-34.00,0.20,0.00:0.00,180.00,0.00:1.80,1.20,1.00: 
+Road_Barrier_Editor:-41.00,0.20,0.00:0.00,180.00,0.00:1.80,1.20,1.00: 
+Road_Barrier_Editor:-34.00,0.20,13.50:0.00,180.00,0.00:1.80,1.20,1.00: 
+Road_Barrier_Editor:-41.00,0.20,13.50:0.00,180.00,0.00:1.80,1.20,1.00: 
+Road_Barrier_Editor:-34.00,0.20,-13.50:0.00,180.00,0.00:1.80,1.20,1.00: 
+Road_Barrier_Editor:-41.00,0.20,-13.50:0.00,180.00,0.00:1.80,1.20,1.00: 
+Ladder_Editor:-30.00,10.00,13.50:0.00,90.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-29.50,10.00,13.00:0.00,0.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-29.50,10.00,14.00:0.00,0.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-29.00,10.00,13.50:0.00,90.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-45.50,10.00,13.00:0.00,0.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-45.50,10.00,14.00:0.00,0.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-45.00,10.00,13.50:0.00,270.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-46.00,10.00,13.50:0.00,270.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-29.00,10.00,0.00:0.00,90.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-29.00,10.00,-13.50:0.00,90.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-45.00,10.00,0.00:0.00,270.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-45.00,10.00,-13.50:0.00,270.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-29.50,10.00,-0.50:0.00,0.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-29.50,10.00,0.50:0.00,0.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-30.00,10.00,0.00:0.00,90.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-29.50,10.00,-14.00:0.00,0.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-29.50,10.00,-13.00:0.00,0.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-30.00,10.00,-13.50:0.00,90.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-45.50,10.00,-14.00:0.00,180.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-45.50,10.00,-13.00:0.00,180.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-46.00,10.00,-13.50:0.00,270.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-45.50,10.00,0.50:0.00,180.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-45.50,10.00,-0.50:0.00,180.00,180.00:1.20,2.10,1.50: 
+Ladder_Editor:-46.00,10.00,0.00:0.00,270.00,180.00:1.20,2.10,1.50: 
+Block_Scalable_Editor:-37.50,7.40,-10.30:15.00,0.00,0.00:25.00,0.30,7.00:color{1.00,1.00,1.00} material{Metal_Floor_Other,0.25}
+Block_Scalable_Editor:-37.50,7.40,-3.60:345.00,0.00,0.00:25.00,0.30,7.00:color{1.00,1.00,1.00} material{Metal_Floor_Other,0.25}
+Block_Scalable_Editor:-37.50,7.40,3.00:15.00,0.00,0.00:25.00,0.30,7.00:color{1.00,1.00,1.00} material{Metal_Floor_Other,0.25}
+Block_Scalable_Editor:-37.50,7.40,9.80:345.00,0.00,0.00:25.00,0.30,7.00:color{1.00,1.00,1.00} material{Metal_Floor_Other,0.25}
+Block_Scalable_Editor:-25.90,8.70,0.00:0.00,0.00,0.00:0.40,7.00,18.00:color{1.00,1.00,1.00}
+UI_Scalable_Editor:-25.60,7.00,0.00:0.00,270.00,0.00:14.00,14.00,1.00:<color=black><size=100><b>DRIVE INSIDE HERE TO RACE|<color=red><size=70>ONLY TWO PLAYERS AT A TIME|DRIVE AND STOP AT THE CENTER
+Speed_Booster_Editor:-46.99,1.80,-6.52:90.00,90.00,0.00:0.60,1.00,0.20: 
+Speed_Booster_Editor:-46.99,1.80,6.48:90.00,90.00,0.00:0.60,1.00,0.20: 
+Speed_Bump_Editor:-9.71,1.99,42.46:0.00,90.00,0.00:1.00,1.00,0.60: 
+Road_Barrier_Editor:-19.30,0.00,45.00:0.00,90.00,0.00:1.80,1.20,1.00: 
+Road_Barrier_Editor:19.30,0.00,45.00:0.00,90.00,0.00:1.80,1.20,1.00: 
+Speed_Bump_Editor:9.69,1.99,42.46:0.00,90.00,0.00:1.00,1.00,0.60: 
+Plane_Transparent_Cutout_Tiled_Editor:7.00,0.10,49.90:90.00,0.00,0.00:0.70,22.00,8.00:color{0.34,0.33,0.32} material{Bottom_dirt_decal,0.01}
+Plane_Transparent_Cutout_Tiled_Editor:11.00,0.10,49.90:90.00,0.00,0.00:0.70,22.00,8.00:color{0.34,0.33,0.32} material{Bottom_dirt_decal,0.01}
+Plane_Transparent_Cutout_Tiled_Editor:-7.00,0.10,49.90:90.00,0.00,0.00:0.70,22.00,8.00:color{0.34,0.33,0.32} material{Bottom_dirt_decal,0.01}
+Plane_Transparent_Cutout_Tiled_Editor:-11.00,0.10,49.90:90.00,0.00,0.00:0.70,22.00,8.00:color{0.34,0.33,0.32} material{Bottom_dirt_decal,0.01}
+Trigger_Box_Editor:-37.00,1.80,-6.80:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|ifcondition{isinvehicle=true&&global_float_c=0&&global_string_a=uhhhh}|globalvar{set*global_string_a*[playername]}|sound{notif4*999*999}|draw{halo3*3}
+Trigger_Box_Editor:-37.00,1.80,6.80:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|ifcondition{isinvehicle=true&&global_float_c=0&&global_string_b=uhhhh}|globalvar{set*global_string_b*[playername]}|sound{notif4*999*999}|draw{halo3*3}
+Trigger_Box_Editor:-37.00,0.20,-6.80:0.00,0.00,0.00:3.00,3.00,3.00:mode{stay}|player{cammode*1}
+Trigger_Box_Editor:-37.00,0.20,6.80:0.00,0.00,0.00:3.00,3.00,3.00:mode{stay}|player{cammode*1}
+Glass_Scalable_Editor:-37.50,0.20,-0.10:0.00,0.00,0.00:16.00,7.50,0.40:color{1.00,1.00,1.00}
+Container_Open_Editor:-47.50,-20.40,-6.80:90.00,90.00,0.00:2.50,3.80,2.50: 
+Container_Open_Editor:-47.33,-20.40,6.63:90.00,90.00,0.00:2.50,3.80,2.50: 
+Trigger_Box_Editor:-30.00,1.00,-23.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{loop}|ifcondition{global_float_c!=0}|scale{-47.5,-20.4,-6.8*2.5,3.8,3.4*999}|cooldown{5}|draw{halo}
+Trigger_Box_Editor:-30.00,1.00,-26.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{loop}|ifcondition{global_float_c!=0}|scale{-47.5,-20.4,6.7*2.5,3.8,3.4*999}|cooldown{5}|draw{halo}
+Blackboard_Big_Editor:-29.00,0.00,-33.00:0.00,270.00,0.00:1.00,1.00,1.00:list of variables for Juan to remember...|- string_a is for player 1 name|- string_b is for player 2 name|- string_c is for the winner display|- string_d controls the timer for player 1|- string_e controls the timer for player 2|- float_a is for player 1 timer|- float_b is for player 2 timer|- float_c is equal 1 if a race is in progress|- float_d is equal 0 until the lights are green|- float_e is a workaround fot the calltriggerbox bug that ignores ifcondition ;(
+Glass_Scalable_Editor:-37.50,0.20,-13.00:0.00,0.00,0.00:16.00,7.50,0.40:color{1.00,1.00,1.00}
+Glass_Scalable_Editor:-37.50,0.20,13.00:0.00,0.00,0.00:16.00,7.50,0.40:color{1.00,1.00,1.00}
+Blackboard_Big_Editor:-24.00,0.30,-16.00:0.00,210.00,0.00:1.00,1.00,1.00:PEDESTRIANS|BE AWARE OF <b>ROTATED LADDERS</b>||APROACH THEM AT YOUR OWN RISK
+Road_Barrier_Cone_Editor:-27.00,1.00,-12.00:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Barrier_Cone_Editor:-27.00,2.00,0.00:0.00,35.00,241.00:1.00,1.00,1.00: 
+Road_Barrier_Cone_Editor:-28.00,1.00,14.00:0.00,38.00,0.00:1.00,1.00,1.00: 
+Road_Barrier_Cone_Editor:-23.00,1.00,48.00:0.00,38.00,0.00:1.00,1.00,1.00: 
+Road_Barrier_Cone_Editor:-24.00,1.00,51.00:0.00,0.00,0.00:1.00,1.00,1.00: 
+Road_Barrier_Cone_Editor:-22.00,1.00,54.00:0.00,32.00,107.00:1.00,1.00,1.00: 
+Spawn_Point_Editor:30.00,0.00,0.00:0.00,0.00,0.00:1.00,1.00,1.00: 
+Trigger_Box_Editor:20.00,1.50,0.00:0.00,0.00,0.00:45.00,3.00,3.00:mode{enter}|ifcondition{ishost=true}|calltriggerbox{20,17,0}|deactivate{}
+Trigger_Box_Editor:-40.00,-2.00,-6.80:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|ifcondition{global_string_a!=uhhhh&&global_string_b!=uhhhh&&global_string_a=[playername]}|sound{notif2*999*999}|calltriggerbox{-30,-4,-23}|calltriggerbox{-40,-2,0}|teleport{-9,1,49*0*true}
+Trigger_Box_Editor:-40.00,-2.00,6.80:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|ifcondition{global_string_a!=uhhhh&&global_string_b!=uhhhh&&global_string_b=[playername]}|sound{notif2*999*999}|calltriggerbox{-30,-4,-23}|calltriggerbox{-40,-2,0}|teleport{9,1,49*0*true}
+Trigger_Box_Editor:-30.00,-10.00,-23.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|tip{do not cross the line until the lights are green}|draw{halo}|sound{notif5*1000*1000}
+Trigger_Box_Editor:0.00,-5.00,71.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|chat{/emptyvehicle}|calltriggerbox{0,-8,71*0.1}|calltriggerbox{20,17,0}
+Trigger_Box_Editor:0.00,-8.00,71.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|chat{/despawnvehicle}|player{respawn}
+Trigger_Box_Editor:-33.00,1.00,-26.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{loop}|ifcondition{global_float_e=1&&global_float_c!=0}|globalvar{set*global_float_e*0}|calltriggerbox{-6,-3,79}|cooldown{5}|draw{halo}
+Trigger_Box_Editor:-30.00,-7.00,-23.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|tip{get yourself in position and ready}|draw{halo}|sound{notif5*1000*1000}
+Trigger_Box_Editor:-30.00,-4.00,-26.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|globalvar{set*global_float_e*1}|draw{halo}
+Road_Racing_Wide_Editor:0.00,-0.50,678.56:0.00,0.00,0.00:1.00,1.00,1.00: 
+Speed_Booster_Editor:0.00,-3.10,670.00:270.00,0.00,0.00:4.50,15.00,0.40: 
+Road_Barrier_Editor:-19.00,0.00,670.00:0.00,90.00,0.00:1.60,1.20,1.20: 
+Road_Barrier_Editor:-19.00,0.00,664.00:0.00,90.00,0.00:1.60,1.20,1.20: 
+Road_Barrier_Editor:-19.00,0.00,676.00:0.00,90.00,0.00:1.60,1.20,1.20: 
+Road_Barrier_Editor:19.00,0.00,676.00:0.00,90.00,0.00:1.60,1.20,1.20: 
+Road_Barrier_Editor:19.00,0.00,670.00:0.00,90.00,0.00:1.60,1.20,1.20: 
+Road_Barrier_Editor:19.00,0.00,664.00:0.00,90.00,0.00:1.60,1.20,1.20: 
+Steam_Leak_Editor:19.00,3.00,669.00:270.00,0.00,0.00:7.00,7.00,7.00:color{1.00,0.00,0.00}
+Steam_Leak_Editor:-19.00,3.00,669.00:270.00,0.00,0.00:7.00,7.00,7.00:color{1.00,0.00,0.00}
+Trigger_Box_Editor:0.00,1.50,671.40:0.00,0.00,0.00:36.00,7.00,3.00:mode{enter}|ifcondition{global_string_a=[playername]}|globalvar{set*global_string_d*N}|calltriggerbox{0,16,673}
+Trigger_Box_Editor:29.00,20.00,84.50:0.00,0.00,0.00:3.00,3.00,3.00:mode{loop}|ifcondition{global_string_e!=N}|globalvar{add*global_float_b*+0.1}|cooldown{0.1}
+Trigger_Box_Editor:29.00,20.00,96.50:0.00,0.00,0.00:3.00,3.00,3.00:mode{loop}|ifcondition{global_string_d!=N}|globalvar{add*global_float_a*+0.1}|cooldown{0.1}
+Trigger_Box_Editor:0.00,19.00,673.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|effect{flash}|sound{Cheer*1000*1000}
+Trigger_Box_Editor:0.00,7.00,693.00:0.00,0.00,0.00:36.00,14.00,40.00:mode{enter}|ifcondition{global_float_b=global_float_a}|globalvar{set*global_string_c*Draw}|chat{<color=orange><i>Draw</i></color>}|cooldown{5}
+Trigger_Box_Editor:-30.00,-4.00,-20.00:0.00,0.00,0.00:3.00,3.00,3.00:mode{enter}|camsequence{4;0,10,14;0,0,0}|camtranslate{4;0,-1,0;0,0,0}|draw{halo}
+Ramp_Editor:-9.00,0.00,724.00:0.00,0.00,0.00:2.20,1.00,2.00: 
+Ramp_Editor:9.00,0.00,724.00:0.00,0.00,0.00:2.20,1.00,2.00: 
+Trigger_Box_Editor:-40.00,-5.00,6.80:0.00,0.00,0.00:3.00,3.00,3.00:mode{loop}|scale{-40,-2,6.8*25,5,3*10*true}
+Trigger_Box_Editor:-40.00,-5.00,-6.80:0.00,0.00,0.00:3.00,3.00,3.00:mode{loop}|scale{-40,-2,-6.8*25,5,3*10*true}
+Spawn_Point_Editor:40.00,0.00,0.00:0.00,0.00,0.00:1.00,1.00,1.00: 
+
